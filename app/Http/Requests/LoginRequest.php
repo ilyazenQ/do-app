@@ -37,9 +37,10 @@ class LoginRequest extends FormRequest
             ],
             'password' => [
                 'required',
-                 new LoginPasswordRule(
-                     User::query()
-                     ->where('email','=',$this->request->get('email'))->firstOrFail('password'))
+                 new LoginPasswordRule([
+                     'email'=>$this->request->get('email'),
+                     'password'=>$this->request->get('password')
+                 ])
             ],
         ];
     }

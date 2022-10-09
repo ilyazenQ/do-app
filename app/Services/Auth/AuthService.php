@@ -3,11 +3,9 @@
 namespace App\Services\Auth;
 
 use App\Http\Resources\ResponseWithTokenResource;
-use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 
 class AuthService
 {
@@ -28,7 +26,7 @@ class AuthService
     /**
      * Get the token array structure.
      *
-     * @param  string $token
+     * @param string $token
      *
      * @return ResponseWithTokenResource
      */
@@ -37,15 +35,10 @@ class AuthService
         return new ResponseWithTokenResource($token);
     }
 
-    public function loginUser(array $fields)
+    public function loginUser(array $fields): ResponseWithTokenResource
     {
-
-        $credentials = Arr::only($fields,['email','password']);
-
-        if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
+        $credentials = Arr::only($fields, ['email', 'password']);
+        $token = auth()->attempt($credentials);
         return $this->respondWithToken($token);
     }
 

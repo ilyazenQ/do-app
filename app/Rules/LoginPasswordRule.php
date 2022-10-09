@@ -15,7 +15,7 @@ class LoginPasswordRule implements Rule
      * @return void
      */
     public function __construct(
-       private Model $user
+        private $credentials
     )
     {
         //
@@ -30,7 +30,7 @@ class LoginPasswordRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return Hash::check($value,$this->user->password);
+        return auth('api')->attempt($this->credentials);
     }
 
     /**

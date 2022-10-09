@@ -14,14 +14,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group([
-    'middleware' => 'api',
     'prefix' => 'auth'
-], function ($router) {
-    Route::post('register', [\App\Http\Controllers\AuthController::class,'register'])->name('register');
-    Route::post('login', [\App\Http\Controllers\AuthController::class,'login'])->name('login');
-    Route::post('logout', [\App\Http\Controllers\AuthController::class,'logout']);
-    Route::post('refresh', [\App\Http\Controllers\AuthController::class,'refresh']);
-    Route::post('me', [\App\Http\Controllers\AuthController::class,'me']);
+], function () {
+    Route::post('register', [\App\Http\Controllers\AuthController::class, 'register'])->name('register');
+    Route::post('login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
+
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::post('logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+        Route::post('refresh', [\App\Http\Controllers\AuthController::class, 'refresh'])->name('refresh');
+        Route::post('me', [\App\Http\Controllers\AuthController::class, 'me'])->name('me');
+    });
+
+});
+
+Route::group([
+    'prefix' => 'user'
+], function () {
+
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::get('show/{id}', [\App\Http\Controllers\UserController::class, 'show'])->name('user.show');
+        Route::post('update-profile', [\App\Http\Controllers\UserController::class, 'updateUserProfile'])->name('update-profile');
+        Route::post('update-password', [\App\Http\Controllers\UserController::class, 'updateUserPassword'])->name('update-password');
+
+    });
+
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
