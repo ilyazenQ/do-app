@@ -18,11 +18,14 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+
+    const FILLABLE = [
         'name',
         'email',
         'password',
-    ];
+        ];
+
+    protected $fillable = self::FILLABLE;
 
     /**
      * The attributes that should be hidden for serialization.

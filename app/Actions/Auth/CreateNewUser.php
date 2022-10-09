@@ -20,7 +20,6 @@ class CreateNewUser
      */
     public function create($input)
     {
-
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
