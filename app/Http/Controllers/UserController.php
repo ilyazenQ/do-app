@@ -26,7 +26,7 @@ class UserController extends Controller
         return new UserResource($action->execute($request->validated()));
     }
 
-    public function show(int $id)
+    public function show(int $id): UserResource
     {
         return new UserResource(User::where('id', $id)->firstOrFail());
     }
