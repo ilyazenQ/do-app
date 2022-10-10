@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Category\CreateCategoryAction;
+use App\Http\Requests\Category\CreateCategoryRequest;
+use App\Http\Resources\Category\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -10,11 +13,11 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        //
+        return CategoryResource::collection(Category::all());
     }
 
     /**
@@ -31,22 +34,22 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return CategoryResource
      */
-    public function store(Request $request)
+    public function store(CreateCategoryRequest $request, CreateCategoryAction $action): CategoryResource
     {
-        //
+        return new CategoryResource($action->execute($request->validated()));
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * @return CategoryResource
      */
-    public function show(Category $category)
+    public function show(int $id):CategoryResource
     {
-        //
+        return new CategoryResource(Category::query()->where('id','=',$id)->firstOrFail());
     }
 
     /**
@@ -69,7 +72,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+
     }
 
     /**

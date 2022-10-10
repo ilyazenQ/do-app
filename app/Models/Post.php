@@ -9,9 +9,18 @@ class Post extends Model
 {
     use HasFactory;
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    const FILLABLE = [
+        'title',
+        'slug',
+        'body',
+        'img',
+    ];
+
+    protected $fillable = self::FILLABLE;
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\hasOne
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class);
     }
 
     public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
