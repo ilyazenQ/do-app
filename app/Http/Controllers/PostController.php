@@ -3,22 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Post\CreatePostAction;
+use App\Actions\Post\UpdatePostAction;
 use App\Http\Requests\Post\CreatePostRequest;
-use App\Http\Resources\Category\CategoryResource;
+use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-        //
+        return PostResource::collection(Post::paginate());
     }
 
     /**
@@ -45,12 +45,16 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return PostResource
      */
-    public function show(Post $post)
+    public function show(int $id): PostResource
     {
-        //
+        return new PostResource(
+            Post::query()
+                ->where('id','=',$id)
+                ->firstOrFail()
+        );
     }
 
     /**
@@ -67,13 +71,17 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @param UpdatePostRequest $request
+     * @param UpdatePostAction $action
+     * @return PostResource
      */
-    public function update(Request $request, Post $post)
+    public function update(
+        int $id,
+        UpdatePostRequest $request,
+        UpdatePostAction $action): PostResource
     {
-        //
+        return new PostResource($action->execute($request->validated(), $id));
     }
 
     /**

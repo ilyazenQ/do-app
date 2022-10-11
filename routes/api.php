@@ -32,15 +32,14 @@ Route::group([
 ], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('show/{id}', [\App\Http\Controllers\UserController::class, 'show'])->name('user.show');
-        Route::post('update-profile', [\App\Http\Controllers\UserController::class, 'updateUserProfile'])->name('update-profile');
-        Route::post('update-password', [\App\Http\Controllers\UserController::class, 'updateUserPassword'])->name('update-password');
+        Route::patch('update-profile', [\App\Http\Controllers\UserController::class, 'updateUserProfile'])->name('update-profile');
+        Route::patch('update-password', [\App\Http\Controllers\UserController::class, 'updateUserPassword'])->name('update-password');
     });
 });
 
 Route::group([
     'prefix' => 'category'
 ], function () {
-
     Route::post('store', [\App\Http\Controllers\CategoryController::class, 'store'])->name('category.store');
     Route::get('show/{id}', [\App\Http\Controllers\CategoryController::class, 'show'])->name('category.show');
     Route::get('/', [\App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
@@ -49,13 +48,14 @@ Route::group([
 Route::group([
     'prefix' => 'post'
 ], function () {
-
+    Route::get('show/{id}', [\App\Http\Controllers\PostController::class, 'show'])->name('post.show');
+    Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('post.index');
     Route::group(['middleware' => 'auth:api'], function () {
         Route::post('store', [\App\Http\Controllers\PostController::class, 'store'])->name('post.store');
+        Route::patch('update/{id}', [\App\Http\Controllers\PostController::class, 'update'])->name('post.update');
     });
 
 });
-
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -19,8 +19,11 @@ class PostResource extends JsonResource
         return [
             'id'=>$this->id,
             'title'=>$this->title,
+            'slug'=>$this->slug,
             'body'=>$this->body,
             'img'=>$this->img,
+            'started_at'=>$this->started_at,
+            'ended_at'=>$this->ended_at,
             'user'=> new UserResource($this->whenLoaded('user')),
             'categories' => CategoryResource::collection($this->whenLoaded('categories'))
         ];

@@ -14,13 +14,15 @@ class Post extends Model
         'slug',
         'body',
         'img',
+        'started_at',
+        'ended_at'
     ];
 
     protected $fillable = self::FILLABLE;
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\hasOne
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany

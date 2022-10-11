@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests\Post;
 
+use App\Models\Post;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
-class CreatePostRequest extends FormRequest
+class UpdatePostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -35,7 +37,7 @@ class CreatePostRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                'unique:posts',
+                Rule::unique('posts')->ignore((int)$this->id),
             ],
             'img' => [
                 'string',
@@ -47,7 +49,7 @@ class CreatePostRequest extends FormRequest
                 'date'
             ],
             'ended_at' => [
-              'date'
+                'date'
             ],
             'categories.*' => [
                 'integer',
@@ -55,7 +57,7 @@ class CreatePostRequest extends FormRequest
             ],
             'categories' => [
                 'required',
-                 'array',
+                'array',
             ]
         ];
     }
