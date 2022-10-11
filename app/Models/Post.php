@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,5 +29,15 @@ class Post extends Model
     public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function scopePostInCategory(Builder $query, string $catId): Builder
+    {
+        $cat = Category::query()
+            ->where('id','=',$catId)
+            ->with('posts')
+            ->firstOrFail();
+        $postIds = $cat->posts->pluck('id')->toArray();
+        return $query->whereIn('id',$postIds);
     }
 }

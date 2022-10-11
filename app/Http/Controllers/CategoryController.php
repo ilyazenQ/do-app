@@ -6,6 +6,7 @@ use App\Actions\Category\CreateCategoryAction;
 use App\Http\Requests\Category\CreateCategoryRequest;
 use App\Http\Resources\Category\CategoryResource;
 use App\Models\Category;
+use App\Queries\Category\CategoryQuery;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,9 +16,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function index(CategoryQuery $query): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        return CategoryResource::collection(Category::all());
+        return CategoryResource::collection($query->paginate());
     }
 
     /**
@@ -49,7 +50,10 @@ class CategoryController extends Controller
      */
     public function show(int $id):CategoryResource
     {
-        return new CategoryResource(Category::query()->where('id','=',$id)->firstOrFail());
+        return new CategoryResource(
+            Category::query()
+                ->where('id','=',$id)
+                ->firstOrFail());
     }
 
     /**

@@ -8,6 +8,7 @@ use App\Http\Requests\Post\CreatePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Post;
+use App\Queries\Post\PostQuery;
 
 class PostController extends Controller
 {
@@ -21,6 +22,10 @@ class PostController extends Controller
         return PostResource::collection(Post::paginate());
     }
 
+    public function search(PostQuery $query): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    {
+        return PostResource::collection($query->paginate());
+    }
     /**
      * Show the form for creating a new resource.
      *

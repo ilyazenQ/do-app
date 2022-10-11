@@ -19,7 +19,6 @@ Route::group([
 ], function () {
     Route::post('register', [\App\Http\Controllers\AuthController::class, 'register'])->name('register');
     Route::post('login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
-
     Route::group(['middleware' => 'auth:api'], function () {
         Route::post('logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
         Route::post('refresh', [\App\Http\Controllers\AuthController::class, 'refresh'])->name('refresh');
@@ -40,9 +39,11 @@ Route::group([
 Route::group([
     'prefix' => 'category'
 ], function () {
-    Route::post('store', [\App\Http\Controllers\CategoryController::class, 'store'])->name('category.store');
     Route::get('show/{id}', [\App\Http\Controllers\CategoryController::class, 'show'])->name('category.show');
     Route::get('/', [\App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::post('store', [\App\Http\Controllers\CategoryController::class, 'store'])->name('category.store');
+    });
 });
 
 Route::group([
@@ -50,6 +51,7 @@ Route::group([
 ], function () {
     Route::get('show/{id}', [\App\Http\Controllers\PostController::class, 'show'])->name('post.show');
     Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('post.index');
+    Route::get('/search', [\App\Http\Controllers\PostController::class, 'search'])->name('post.search');
     Route::group(['middleware' => 'auth:api'], function () {
         Route::post('store', [\App\Http\Controllers\PostController::class, 'store'])->name('post.store');
         Route::patch('update/{id}', [\App\Http\Controllers\PostController::class, 'update'])->name('post.update');
