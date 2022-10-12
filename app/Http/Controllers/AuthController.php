@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterRequest;
-use App\Http\Resources\ResponseWithTokenResource;
-use App\Http\Resources\UserResource;
-use App\Models\User;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Resources\User\ResponseWithTokenResource;
+use App\Http\Resources\User\UserResource;
 use App\Services\Auth\AuthService;
 
 

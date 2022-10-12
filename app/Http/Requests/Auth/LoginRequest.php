@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Auth;
 
 use App\Rules\LoginPasswordRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\Rules\Password;
 
-class UpdateUserPasswordRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,17 +27,19 @@ class UpdateUserPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'current_password' => [
+            'email' => [
                 'required',
-                Password::min(6),
-                new LoginPasswordRule([
-                    'email' => auth()->user()->email,
-                    'password' => $this->request->get('current_password')
-                ]),
+                'string',
+                'email',
+                'max:255',
+                'exists:users'
             ],
-            'new_password' => [
+            'password' => [
                 'required',
-                Password::min(6),
+                 new LoginPasswordRule([
+                     'email'=>$this->request->get('email'),
+                     'password'=>$this->request->get('password')
+                 ])
             ],
         ];
     }

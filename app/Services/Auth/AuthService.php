@@ -2,7 +2,7 @@
 
 namespace App\Services\Auth;
 
-use App\Http\Resources\ResponseWithTokenResource;
+use App\Http\Resources\User\ResponseWithTokenResource;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +28,7 @@ class AuthService
      *
      * @param string $token
      *
-     * @return ResponseWithTokenResource
+     * @return \App\Http\Resources\User\ResponseWithTokenResource
      */
     public function respondWithToken($token): ResponseWithTokenResource
     {

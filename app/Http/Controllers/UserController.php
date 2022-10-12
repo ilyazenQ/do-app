@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Actions\Auth\UpdateUserPassword;
 use App\Actions\User\UpdateUserPasswordAction;
 use App\Actions\User\UpdateUserProfileAction;
-use App\Http\Requests\UpdateUserPasswordRequest;
-use App\Http\Requests\UpdateUserProfileRequest;
-use App\Http\Resources\UserResource;
+use App\Http\Requests\User\UpdateUserPasswordRequest;
+use App\Http\Requests\User\UpdateUserProfileRequest;
+use App\Http\Resources\User\UserResource;
 use App\Models\User;
 
 class UserController extends Controller
