@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Tests\Factories\Category\CategoryFactory;
 
 class Category extends Model
 {
@@ -19,6 +20,11 @@ class Category extends Model
     const CACHE_TIME = 3600;
 
     protected $fillable = self::FILLABLE;
+
+    protected static function newFactory()
+    {
+        return new CategoryFactory();
+    }
 
     public function posts(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {

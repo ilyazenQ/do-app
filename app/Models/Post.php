@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Tests\Factories\Post\PostFactory;
 
 class Post extends Model
 {
@@ -25,6 +26,11 @@ class Post extends Model
     const CACHE_TIME = 3600;
 
     protected $fillable = self::FILLABLE;
+
+    protected static function newFactory()
+    {
+        return new PostFactory();
+    }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

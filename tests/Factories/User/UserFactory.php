@@ -3,9 +3,11 @@
 namespace Tests\Factories\User;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use Tests\Factories\FactoryInterface;
 
-class UserFactory
+class UserFactory implements FactoryInterface
 {
     const PASSWORD = "12345678";
 
@@ -14,7 +16,7 @@ class UserFactory
         return new self();
     }
 
-    public function create(array $data = [], array $extra = []): User
+    public function create(array $data = [], array $extra = []): Model
     {
         $model = User::create([
             'name' => $data['name'] ?? 'testName',

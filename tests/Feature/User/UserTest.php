@@ -22,7 +22,7 @@ class UserTest extends TestCase
 
         $token = JWTAuth::fromUser($user);
 
-        $response = $this->withHeaders(['Authorization'=>'Bearer '.$token])->post('api/user/update-profile',
+        $response = $this->withHeaders(['Authorization'=>'Bearer '.$token])->patch('api/user/update-profile',
             [
                 'email' => 'newMail@mail.ru',
                 'name'=>'newName'
@@ -44,7 +44,7 @@ class UserTest extends TestCase
 
         $token = JWTAuth::fromUser($user);
 
-        $response = $this->withHeaders(['Authorization'=>'Bearer '.$token])->post('api/user/update-password',
+        $response = $this->withHeaders(['Authorization'=>'Bearer '.$token])->patch('api/user/update-password',
             [
                 'current_password' => UserFactory::PASSWORD,
                 'new_password'=>'123456a'
