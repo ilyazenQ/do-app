@@ -9,6 +9,7 @@ use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Post;
 use App\Queries\Post\PostQuery;
+use App\Services\Post\CachePostService;
 
 class PostController extends Controller
 {
@@ -17,9 +18,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(CachePostService $service)
     {
-        return PostResource::collection(Post::paginate());
+        return PostResource::collection($service->rememberForIndex(new Post()));
     }
 
     public function search(PostQuery $query): \Illuminate\Http\Resources\Json\AnonymousResourceCollection

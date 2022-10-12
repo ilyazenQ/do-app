@@ -19,6 +19,11 @@ class Post extends Model
         'ended_at'
     ];
 
+    const RELATIONS = ['user','categories'];
+
+    const CACHE_PREFIX_FOR_ALL = "posts_";
+    const CACHE_TIME = 3600;
+
     protected $fillable = self::FILLABLE;
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

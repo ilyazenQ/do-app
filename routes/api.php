@@ -41,6 +41,8 @@ Route::group([
 ], function () {
     Route::get('show/{id}', [\App\Http\Controllers\CategoryController::class, 'show'])->name('category.show');
     Route::get('/', [\App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
+    Route::get('/search', [\App\Http\Controllers\CategoryController::class, 'search'])->name('category.search');
+
     Route::group(['middleware' => 'auth:api'], function () {
         Route::post('store', [\App\Http\Controllers\CategoryController::class, 'store'])->name('category.store');
     });

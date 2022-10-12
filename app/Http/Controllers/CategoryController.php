@@ -7,6 +7,7 @@ use App\Http\Requests\Category\CreateCategoryRequest;
 use App\Http\Resources\Category\CategoryResource;
 use App\Models\Category;
 use App\Queries\Category\CategoryQuery;
+use App\Services\Category\CacheCategoryService;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -16,7 +17,12 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index(CategoryQuery $query): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function index(CacheCategoryService $service): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    {
+        return CategoryResource::collection($service->rememberForIndex(new Category()));
+    }
+
+    public function search(CategoryQuery $query): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
         return CategoryResource::collection($query->paginate());
     }

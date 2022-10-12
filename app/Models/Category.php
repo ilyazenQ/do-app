@@ -13,6 +13,11 @@ class Category extends Model
         'title',
     ];
 
+    const RELATIONS = ['posts'];
+
+    const CACHE_PREFIX_FOR_ALL = "category_";
+    const CACHE_TIME = 3600;
+
     protected $fillable = self::FILLABLE;
 
     public function posts(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
