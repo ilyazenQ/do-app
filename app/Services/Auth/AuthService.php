@@ -3,9 +3,12 @@
 namespace App\Services\Auth;
 
 use App\Http\Resources\User\ResponseWithTokenResource;
+use App\Jobs\Auth\SendMailSuccessRegisterJob;
+use App\Mail\Auth\SuccessRegister;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthService
 {
@@ -15,12 +18,15 @@ class AuthService
      */
     public function createNewUser(array $fields): User
     {
-        return User::create([
+        $user = User::create([
                 'name' => $fields['name'],
                 'email' => $fields['email'],
                 'password' => Hash::make($fields['password']),
             ]
         );
+        dispatch(new SendMailSuccessRegisterJob($user, $fields));
+
+        return $user;
     }
 
     /**

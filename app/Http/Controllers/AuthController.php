@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Resources\User\ResponseWithTokenResource;
 use App\Http\Resources\User\UserResource;
 use App\Services\Auth\AuthService;
+use Illuminate\Support\Facades\Mail;
 
 
 class AuthController extends Controller

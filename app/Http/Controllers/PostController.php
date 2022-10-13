@@ -10,6 +10,7 @@ use App\Http\Resources\Post\PostResource;
 use App\Models\Post;
 use App\Queries\Post\PostQuery;
 use App\Services\Post\CachePostService;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -20,6 +21,11 @@ class PostController extends Controller
      */
     public function index(CachePostService $service)
     {
+
+        Mail::send(['text'=>'Mail.mail'],['name'=>'test mail'], function($message) {
+            $message->to('forwow95@bk.ru')->subject('test email');
+            // $message->from('ilyazenx@gmail.com','from test');
+        });
         return PostResource::collection($service->rememberForIndex(new Post()));
     }
 
