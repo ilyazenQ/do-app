@@ -10,29 +10,31 @@ use App\Http\Resources\Post\PostResource;
 use App\Models\Post;
 use App\Queries\Post\PostQuery;
 use App\Services\Post\CachePostService;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return AnonymousResourceCollection
      */
     public function index(CachePostService $service)
     {
-
-        Mail::send(['text'=>'Mail.mail'],['name'=>'test mail'], function($message) {
-            $message->to('forwow95@bk.ru')->subject('test email');
-            // $message->from('ilyazenx@gmail.com','from test');
-        });
         return PostResource::collection($service->rememberForIndex(new Post()));
     }
 
-    public function search(PostQuery $query): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    /**
+     * Can filter posts
+     *
+     * @param PostQuery $query
+     * @return AnonymousResourceCollection
+     */
+    public function search(PostQuery $query): AnonymousResourceCollection
     {
         return PostResource::collection($query->paginate());
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -46,7 +48,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return PostResource
      */
     public function store(CreatePostRequest $request, CreatePostAction $action): PostResource
@@ -64,7 +66,7 @@ class PostController extends Controller
     {
         return new PostResource(
             Post::query()
-                ->where('id','=',$id)
+                ->where('id', '=', $id)
                 ->firstOrFail()
         );
     }
@@ -72,7 +74,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param \App\Models\Post $post
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post)
@@ -89,9 +91,9 @@ class PostController extends Controller
      * @return PostResource
      */
     public function update(
-        int $id,
+        int               $id,
         UpdatePostRequest $request,
-        UpdatePostAction $action): PostResource
+        UpdatePostAction  $action): PostResource
     {
         return new PostResource($action->execute($request->validated(), $id));
     }
@@ -99,7 +101,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param \App\Models\Post $post
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
