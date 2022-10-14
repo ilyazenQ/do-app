@@ -45,6 +45,9 @@ class RegisterRequest extends FormRequest
                 Password::min(6),
                 'confirmed',
             ],
+            'password_confirmation' => [
+                'required'
+            ]
         ];
     }
 
