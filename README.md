@@ -19,17 +19,15 @@
 ## Разворот
 
 1. `git clone git@github.com:ilyazenQ/do-app.git`<br>
-2. `composer require laravel/sail --dev`<br>
-3. `php artisan sail:install`<br>
+2. `cd do-app`<br>
+3. `composer require laravel/sail --dev`<br>
 4. `./vendor/bin/sail up`<br>
 5. `cp .env.example .env` В .env.example указаны верные данные для cтандартного sail контейнера<br>
 6. `./vendor/bin/sail shell`<br>
 7. `php artisan key:generate`<br>
 8. `php artisan storage:link`<br>
 9. `php artisan jwt:secret`<br>
-10. `php artisan lrd:generate`<br>
-11. `php artisan scribe:generate`<br>
-12. `php artisan migrate`<br>
+10. `php artisan migrate`<br>
 
 ## *Документация и тесты
 
