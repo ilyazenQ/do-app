@@ -27,7 +27,7 @@
 7. `php artisan key:generate`<br>
 8. `php artisan storage:link`<br>
 9. `php artisan jwt:secret`<br>
-10. `php artisan migrate`<br>
+10. `php artisan migrate --seed`<br>
 
 ## *Документация и тесты
 
