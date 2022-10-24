@@ -280,7 +280,7 @@ paths:
               schema:
                 type: object
                 example:
-                  message: 'App\Http\Controllers\CategoryController::show(): Argument #1 ($id) must be of type int, string given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php on line 54'
+                  message: 'App\Http\Controllers\Api\CategoryController::show(): Argument #1 ($id) must be of type int, string given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php on line 54'
                   exception: TypeError
                   file: /var/www/html/app/Http/Controllers/CategoryController.php
                   line: 57
@@ -289,7 +289,7 @@ paths:
                       file: /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php
                       line: 54
                       function: show
-                      class: App\Http\Controllers\CategoryController
+                      class: App\Http\Controllers\Api\CategoryController
                       type: '->'
                     -
                       file: /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php
@@ -660,7 +660,7 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: 'App\Http\Controllers\CategoryController::show(): Argument #1 ($id) must be of type int, string given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php on line 54'
+                    example: 'App\Http\Controllers\Api\CategoryController::show(): Argument #1 ($id) must be of type int, string given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php on line 54'
                   exception:
                     type: string
                     example: TypeError
@@ -677,7 +677,7 @@ paths:
                         file: /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php
                         line: 54
                         function: show
-                        class: App\Http\Controllers\CategoryController
+                        class: App\Http\Controllers\Api\CategoryController
                         type: '->'
                       -
                         file: /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php
@@ -1304,7 +1304,7 @@ paths:
               schema:
                 type: object
                 example:
-                  message: 'App\Http\Controllers\PostController::show(): Argument #1 ($id) must be of type int, string given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php on line 54'
+                  message: 'App\Http\Controllers\Api\PostController::show(): Argument #1 ($id) must be of type int, string given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php on line 54'
                   exception: TypeError
                   file: /var/www/html/app/Http/Controllers/PostController.php
                   line: 63
@@ -1313,7 +1313,7 @@ paths:
                       file: /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php
                       line: 54
                       function: show
-                      class: App\Http\Controllers\PostController
+                      class: App\Http\Controllers\Api\PostController
                       type: '->'
                     -
                       file: /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php
@@ -1684,7 +1684,7 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: 'App\Http\Controllers\PostController::show(): Argument #1 ($id) must be of type int, string given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php on line 54'
+                    example: 'App\Http\Controllers\Api\PostController::show(): Argument #1 ($id) must be of type int, string given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php on line 54'
                   exception:
                     type: string
                     example: TypeError
@@ -1701,7 +1701,7 @@ paths:
                         file: /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php
                         line: 54
                         function: show
-                        class: App\Http\Controllers\PostController
+                        class: App\Http\Controllers\Api\PostController
                         type: '->'
                       -
                         file: /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php
@@ -2185,7 +2185,7 @@ paths:
                       file: /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php
                       line: 54
                       function: index
-                      class: App\Http\Controllers\PostController
+                      class: App\Http\Controllers\Api\PostController
                       type: '->'
                     -
                       file: /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php
@@ -2639,7 +2639,7 @@ paths:
                         file: /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php
                         line: 54
                         function: index
-                        class: App\Http\Controllers\PostController
+                        class: App\Http\Controllers\Api\PostController
                         type: '->'
                       -
                         file: /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php

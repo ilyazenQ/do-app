@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Actions\Auth\UpdateUserPassword;
 use App\Actions\User\UpdateUserPasswordAction;
 use App\Actions\User\UpdateUserProfileAction;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UpdateUserPasswordRequest;
 use App\Http\Requests\User\UpdateUserProfileRequest;
 use App\Http\Resources\User\UserResource;

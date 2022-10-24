@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Inertia;
 
 use App\Actions\Post\CreatePostAction;
 use App\Actions\Post\UpdatePostAction;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreatePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Resources\Post\PostResource;
@@ -11,17 +12,24 @@ use App\Models\Post;
 use App\Queries\Post\PostQuery;
 use App\Services\Post\CachePostService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return AnonymousResourceCollection
+     * @return \Inertia\Response
      */
     public function index(CachePostService $service)
     {
-        return PostResource::collection($service->rememberForIndex(new Post()));
+        $posts = PostResource::collection($service->rememberForIndex(new Post()));
+        return Inertia::render('Do-app/Index', [
+                    'canLogin' => true,
+                    'canRegister' => true,
+                    'posts' => $posts
+        ]);
     }
 
     /**

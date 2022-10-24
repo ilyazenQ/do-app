@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Resources\User\ResponseWithTokenResource;
 use App\Http\Resources\User\UserResource;
 use App\Services\Auth\AuthService;
-use Illuminate\Support\Facades\Mail;
 
 
 class AuthController extends Controller
